@@ -230,6 +230,15 @@ body.opened #btnMusic{display:flex}
 .info-card h4{font-family:'Playfair Display',serif;font-size:17px;margin-bottom:2px}
 .info-card p{font-size:13px;line-height:1.65;margin-top:4px}
 .vid-stage{position:relative;height:308px;overflow:hidden;background:#181126;border-radius:12px}
+.vid-stage{height:452px}
+.vid-stage video{width:100%;height:100%;object-fit:cover;object-position:50% 32%;display:block;background:#0d0918}
+.vid-wrap.playing .vid-btn{pointer-events:none}
+.gt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px;text-align:left}
+.gt-item{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--line);aspect-ratio:1;background:rgba(127,110,60,.10)}
+.gt-item img{width:100%;height:100%;object-fit:cover;display:block}
+.gt-del{position:absolute;top:5px;right:5px;width:24px;height:24px;border-radius:50%;border:1px solid var(--gold-l);background:rgba(20,12,6,.68);color:#fff6d8;font-size:14px;line-height:1;display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer;z-index:2}
+.gt-empty{font-size:12.5px;line-height:1.65;margin-top:14px;opacity:.85}
+.gt-up{display:inline-block;cursor:pointer;margin-top:14px}
 .vid-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.5s cubic-bezier(.37,0,.63,1)}
 .vid-slide.on{opacity:1}
 .vid-slide img{width:100%;height:100%;object-fit:cover;border-radius:0}
@@ -539,17 +548,12 @@ body.opened #btnMusic{display:flex}
         <div class="rv rv-zoom" style="border:3px solid var(--gold);border-radius:14px;padding:6px;background:#1c1107;box-shadow:0 16px 36px rgba(0,0,0,.5)">
           <div class="vid-wrap" id="vidWrap">
             <div class="vid-stage" style="border-radius:9px">
-              <div class="vid-slide on"><img src="assets/undangya/pusaka-sogan/galeri-1.webp" alt="Cuplikan foto pasangan 1" loading="lazy" decoding="async"></div>
-              <div class="vid-slide"><img src="assets/undangya/pusaka-sogan/galeri-2.webp" alt="Cuplikan foto pasangan 2" loading="lazy" decoding="async"></div>
-              <div class="vid-slide"><img src="assets/undangya/pusaka-sogan/galeri-5.webp" alt="Cuplikan foto pasangan 3" loading="lazy" decoding="async"></div>
-              <div class="vid-slide"><img src="assets/undangya/pusaka-sogan/hero.webp" alt="Cuplikan foto pasangan berdua" loading="lazy" decoding="async"></div>
-              <div class="vid-bar"></div>
-              <button class="vid-btn" id="vidBtn" type="button" aria-label="Putar atau jeda cuplikan">▶</button>
-              <div class="vid-dots" id="vidDots" aria-hidden="true"></div>
+              <video id="teaserVideo" src="assets/undangya/pusaka-sogan/teaser.mp4" poster="assets/undangya/pusaka-sogan/teaser-poster.webp" preload="none" playsinline controls aria-label="Video teaser Meyzsa dan Fahrezzi"></video>
+              <button class="vid-btn" id="vidBtn" type="button" aria-label="Putar atau jeda video teaser">▶</button>
             </div>
           </div>
         </div>
-        <p class="demo-note rv rv-up">Cuplikan foto — contoh (slideshow foto pasangan dengan gerak zoom lembut, bukan video rekaman).</p>
+        <p class="demo-note rv rv-up">Video teaser — contoh (dirender dari foto pasangan tema ini dengan lagu pengiring; pada undangan asli dapat diganti video prewedding mempelai).</p>
       </div>
     </section>
 
@@ -573,6 +577,16 @@ body.opened #btnMusic{display:flex}
           <div class="tag-big">#MeyzsaFahrezzi</div>
           <p style="font-size:12.5px;line-height:1.65;margin-top:4px">Abadikan momen bahagia Anda dan tandai dengan tagar resmi kami.</p>
           <button class="salin-btn" type="button" data-copytext="#MeyzsaFahrezzi">SALIN TAGAR</button>
+        </div>
+        <div class="card rv rv-zoom" style="text-align:center;margin-top:16px">
+          <div class="sec-kicker">GALERI TAMU</div>
+          <h3 class="sub-h">Galeri Tamu</h3>
+          <p style="font-size:13px;line-height:1.7">Bagikan momen bahagia Anda selama acara — unggah foto Anda di sini dan tandai juga dengan tagar <b>#MeyzsaFahrezzi</b>.</p>
+          <label class="salin-btn gt-up" for="gtInput">＋ UNGGAH FOTO</label>
+          <input id="gtInput" type="file" accept="image/*" multiple hidden>
+          <div class="gt-grid" id="gtGrid" aria-live="polite"></div>
+          <p class="gt-empty" id="gtEmpty">Jadilah yang pertama membagikan momen — ketuk tombol unggah.</p>
+          <p class="demo-note">Contoh — foto tersimpan di perangkat ini saja (penyimpanan lokal peramban), tidak diunggah ke server.</p>
         </div>
       </div>
     </section>
@@ -1040,22 +1054,48 @@ body.opened #btnMusic{display:flex}
       setTimeout(function(){URL.revokeObjectURL(u);},4000);
     });
   });
+  /* --- MENU 19: video teaser MP4 asli + galeri tamu (localStorage perangkat ini) --- */
   (function(){
     var wrap=document.getElementById("vidWrap"); if(!wrap)return;
-    var slides=wrap.querySelectorAll(".vid-slide"), dots=document.getElementById("vidDots"),
-        btn=document.getElementById("vidBtn"), idx=0, timer=null;
-    slides.forEach(function(s,i){var d=document.createElement("i"); if(i===0)d.className="on"; dots.appendChild(d);});
-    var dotEls=dots.children;
-    function show(n){slides[idx].classList.remove("on"); if(dotEls[idx])dotEls[idx].classList.remove("on");
-      idx=(n+slides.length)%slides.length; slides[idx].classList.add("on"); if(dotEls[idx])dotEls[idx].classList.add("on");}
-    var playing=false;
-    function play(){if(playing)return; playing=true; wrap.classList.add("playing"); wrap.classList.remove("paused"); btn.textContent="\u275A\u275A";
-      if(!reduced)timer=setInterval(function(){show(idx+1);},4600);}
-    function pause(){playing=false; wrap.classList.remove("playing"); wrap.classList.add("paused"); btn.textContent="\u25B6";
-      if(timer){clearInterval(timer);timer=null;}}
-    btn.addEventListener("click",function(){playing?pause():play();});
-    if(!reduced)play(); else wrap.classList.add("paused");
+    var v=document.getElementById("teaserVideo"), btn=document.getElementById("vidBtn");
+    if(!v||!btn)return;
+    function sync(){var playing=!v.paused&&!v.ended; wrap.classList.toggle("playing",playing); btn.textContent=playing?"❚❚":"▶";}
+    btn.addEventListener("click",function(){ if(v.paused||v.ended){v.play();}else{v.pause();} });
+    v.addEventListener("play",sync); v.addEventListener("pause",sync); v.addEventListener("ended",sync); sync();
+    if("IntersectionObserver" in window){ new IntersectionObserver(function(es){es.forEach(function(en){ if(!en.isIntersecting&&!v.paused){v.pause();} });},{threshold:.15}).observe(v); }
   })();
+  var GTKEY="pusaka-sogan-galeri-tamu-v1", gtGrid=document.getElementById("gtGrid"), gtEmpty=document.getElementById("gtEmpty"), gtInput=document.getElementById("gtInput");
+  function gtLoad(){try{var v=JSON.parse(localStorage.getItem(GTKEY));if(Array.isArray(v))return v;}catch(e){} return [];}
+  function gtSave(items){try{localStorage.setItem(GTKEY,JSON.stringify(items));return true;}catch(e){return false;}}
+  function gtRender(items){ if(!gtGrid)return; gtGrid.innerHTML="";
+    items.forEach(function(src,i){ var d=document.createElement("div");d.className="gt-item";
+      var im=document.createElement("img");im.src=src;im.alt="Foto galeri tamu "+(i+1);im.loading="lazy";
+      var b=document.createElement("button");b.className="gt-del";b.type="button";b.setAttribute("data-i",i);b.setAttribute("aria-label","Hapus foto");b.textContent="×";
+      d.appendChild(im);d.appendChild(b);gtGrid.appendChild(d);});
+    if(gtEmpty)gtEmpty.style.display=items.length?"none":""; }
+  var gtItems=gtLoad(); gtRender(gtItems);
+  if(gtGrid)gtGrid.addEventListener("click",function(e){ var b=e.target.closest(".gt-del"); if(!b)return;
+    gtItems.splice(parseInt(b.getAttribute("data-i"),10),1); gtSave(gtItems); gtRender(gtItems); });
+  if(gtInput)gtInput.addEventListener("change",function(){
+    var files=Array.prototype.slice.call(gtInput.files||[]).filter(function(f){return f.type.indexOf("image/")===0;});
+    if(!files.length)return;
+    var pending=files.length;
+    function done(){ if(--pending===0){ gtRender(gtItems); gtInput.value=""; } }
+    files.forEach(function(f){
+      var url=URL.createObjectURL(f), img=new Image();
+      img.onload=function(){ URL.revokeObjectURL(url);
+        var max=900, sc=Math.min(1,max/Math.max(img.naturalWidth||max,img.naturalHeight||max));
+        var cv=document.createElement("canvas");
+        cv.width=Math.max(1,Math.round(img.naturalWidth*sc)); cv.height=Math.max(1,Math.round(img.naturalHeight*sc));
+        cv.getContext("2d").drawImage(img,0,0,cv.width,cv.height);
+        gtItems.unshift(cv.toDataURL("image/jpeg",0.82));
+        if(gtItems.length>24)gtItems.length=24;
+        if(!gtSave(gtItems)){ gtItems=gtItems.slice(0,8); if(!gtSave(gtItems)){alert("Penyimpanan perangkat penuh — sebagian foto tidak dapat disimpan.");} }
+        done(); };
+      img.onerror=function(){ URL.revokeObjectURL(url); done(); };
+      img.src=url;
+    });
+  });
   var CIKEY="pusaka-sogan-checkin-v1", ciList=document.getElementById("ciList");
   var ciSeed=[{n:"Keluarga Besar Pratama",s:"Resepsi",w:"11.02 WIB (contoh)"},{n:"Sahabat Meyzsa",s:"Akad Nikah",w:"07.58 WIB (contoh)"}];
   function ciLoad(){try{var v=JSON.parse(localStorage.getItem(CIKEY));if(Array.isArray(v))return v;}catch(e){} return ciSeed.slice();}
