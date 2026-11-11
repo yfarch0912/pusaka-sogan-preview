@@ -48,7 +48,6 @@ button{font-family:inherit;cursor:pointer}
 .lyr-castle{left:50%;bottom:12%;width:116%;transform:translateX(-50%);animation:castleRise 1.8s .8s cubic-bezier(.22,.8,.3,1) both}
 @keyframes castleRise{from{opacity:0;transform:translateX(-50%) translateY(70px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 @keyframes fadeUp{from{opacity:0}to{opacity:1}}
-.lyr-tree{left:-6%;bottom:37%;width:46%;transform-origin:50% 100%;animation:fadeUp 1.4s 1s ease both;opacity:.96}
 .lyr-lamp{bottom:33%;width:10.5%;transform-origin:50% 0;animation:fadeUp 1s 1.9s ease both}
 .lyr-lamp.l{left:3.5%}.lyr-lamp.r{right:3.5%}
 .lamp-glow{position:absolute;bottom:31%;width:24%;height:14%;border-radius:50%;background:radial-gradient(50% 50% at 50% 50%,rgba(255,178,84,.5),transparent 70%);animation:flick 1.7s ease-in-out infinite alternate;pointer-events:none}
@@ -231,7 +230,6 @@ body.opened #btnMusic{display:flex}
     <div class="scene" id="scene">
       <img class="lyr lyr-sky" src="assets/undangya/pusaka-sogan/langit-sogan.webp" alt="">
       <img class="lyr lyr-yard" src="assets/undangya/pusaka-sogan/bg-taman.webp" alt="" data-plx="6">
-      <img class="lyr lyr-tree wind-fl" data-wind="soft" data-amp="0.8" data-dur="9800" style="z-index:1" src="assets/undangya/pusaka-sogan/beringin.webp" alt="" >
       <img class="lyr lyr-castle" src="assets/undangya/pusaka-sogan/joglo.webp" alt="Joglo kayu jati gelap dengan lampu damar berpendar di malam hari" data-plx="12">
       <img class="lyr lyr-lamp l flwt-sway" data-wind="gantung" data-amp="1.4" data-dur="8200" data-bend="2.2" src="assets/undangya/pusaka-sogan/lentera-damar.webp" alt="">
       <img class="lyr lyr-lamp r flwt-sway" data-wind="gantung" data-amp="1.6" data-dur="8800" data-bend="2.4" src="assets/undangya/pusaka-sogan/lentera-damar.webp" alt="">
@@ -243,13 +241,13 @@ body.opened #btnMusic{display:flex}
       <img class="lyr lyr-janur" src="assets/undangya/pusaka-sogan/janur.webp" alt="Janur kuning melengkung, dekorasi gerbang pengantin Jawa">
       <!-- bunga GANTUNG atas: ronce & ranting menjuntai dari titik gantung atas; tengah lega untuk gunungan + judul.
            Susunan diperapat: gugusan sudut + untaian ganda di sisi + ujung ranting pendek di tengah-atas (berakhir di atas kicker) -->
-      <img class="lyr flwt back wind-fl" data-wind="gantung" data-amp="1.6" data-dur="9400" data-bend="2.8" style="left:-3.5%;top:-3%;width:16.5%;animation-delay:2.5s" src="assets/undangya/pusaka-sogan/flw-bougenville-gantung.webp" alt="">
+      <img class="lyr flwt back wind-fl" data-wind="gantung" data-amp="1.6" data-dur="9400" data-bend="2.8" style="left:-4%;top:-3%;width:19%;animation-delay:2.5s" src="assets/undangya/pusaka-sogan/flw-bougenville-gantung.webp" alt="">
       <img class="lyr flwt back wind-fl" data-wind="gantung" data-amp="1.8" data-dur="9800" data-bend="3" style="right:-3.5%;top:-3%;width:16.5%;animation-delay:2.55s" src="assets/undangya/pusaka-sogan/flw-bougenville-gantung.webp" alt="">
-      <img class="lyr flwt back wind-fl" data-wind="gantung" data-amp="1.7" data-dur="9200" data-bend="3" style="left:9%;top:-3%;width:11%;animation-delay:2.6s" src="assets/undangya/pusaka-sogan/flw-kamboja-gantung.webp" alt="">
+      <img class="lyr flwt back wind-fl" data-wind="gantung" data-amp="1.7" data-dur="9200" data-bend="3" style="left:9.5%;top:-3%;width:13%;animation-delay:2.6s" src="assets/undangya/pusaka-sogan/flw-kamboja-gantung.webp" alt="">
       <img class="lyr flwt back wind-fl" data-wind="gantung" data-amp="1.9" data-dur="8600" data-bend="3.2" style="right:9%;top:-3%;width:11%;animation-delay:2.7s" src="assets/undangya/pusaka-sogan/flw-bougenville-gantung.webp" alt="">
-      <img class="lyr flwt back wind-fl" data-wind="gantung" data-amp="2" data-dur="9000" data-bend="3.2" style="left:8%;top:-2.5%;width:8.5%;animation-delay:2.75s" src="assets/undangya/pusaka-sogan/flw-ronce.webp" alt="">
+      <img class="lyr flwt back wind-fl" data-wind="gantung" data-amp="2" data-dur="9000" data-bend="3.2" style="left:7.5%;top:-2.5%;width:10.5%;animation-delay:2.75s" src="assets/undangya/pusaka-sogan/flw-ronce.webp" alt="">
       <img class="lyr flwt back wind-fl" data-wind="gantung" data-amp="1.9" data-dur="9400" data-bend="3.1" style="right:8%;top:-2.5%;width:8.5%;animation-delay:2.8s" src="assets/undangya/pusaka-sogan/flw-ronce.webp" alt="">
-      <img class="lyr flwt wind-fl" data-wind="gantung" data-amp="2.4" data-dur="8400" data-bend="3.6" style="left:-1%;top:-2%;width:15.5%;animation-delay:2.95s" src="assets/undangya/pusaka-sogan/flw-ronce.webp" alt="">
+      <img class="lyr flwt wind-fl" data-wind="gantung" data-amp="2.4" data-dur="8400" data-bend="3.6" style="left:-1.5%;top:-2%;width:18%;animation-delay:2.95s" src="assets/undangya/pusaka-sogan/flw-ronce.webp" alt="">
       <img class="lyr flwt wind-fl" data-wind="gantung" data-amp="2.2" data-dur="9000" data-bend="3.4" style="right:-1%;top:-2%;width:14.5%;animation-delay:3.05s" src="assets/undangya/pusaka-sogan/flw-ronce.webp" alt="">
       <img class="lyr flwt wind-fl" data-wind="gantung" data-amp="2.6" data-dur="7800" data-bend="3.7" style="left:21%;top:-4%;width:10%;animation-delay:3.15s" src="assets/undangya/pusaka-sogan/flw-bougenville-gantung.webp" alt="">
       <img class="lyr flwt wind-fl" data-wind="gantung" data-amp="2.6" data-dur="8000" data-bend="3.7" style="right:21%;top:-4%;width:10%;animation-delay:3.2s" src="assets/undangya/pusaka-sogan/flw-kamboja-gantung.webp" alt="">
@@ -516,7 +514,7 @@ body.opened #btnMusic{display:flex}
      · TEGAK  (data-wind="tegak")  : rotasi dari pangkal BAWAH (transform-origin 50% 100%).
      · GANTUNG(data-wind="gantung"): rotasi dari titik gantung ATAS (50% 0).
      · LEMBUT (data-wind="soft")   : pohon besar, rotasi sangat kecil dari pangkal bawah.
-     · MELAYANG: kelopak melati & daun gugur (partikel, memang berpindah tempat).
+     · MELAYANG: kelopak melati (partikel, memang berpindah tempat).
      Animasi angin HANYA memakai properti `rotate` WAAPI — TANPA translate sama sekali,
      jadi akar/pangkal/titik gantung TIDAK PERNAH bergeser; hanya ujung yang melambai.
      Kurva sinus 9 titik, amplitudo ±1,6–3°, siklus 7–10 dtk, fasa beda per elemen.
@@ -591,15 +589,15 @@ body.opened #btnMusic{display:flex}
     return {bottomX:r.left+r.width/2,bottomY:r.bottom,topX:r.left+r.width/2,topY:r.top,w:r.width,h:r.height};
   };
 
-  /* --- kelopak melati & daun gugur melayang (partikel MELAYANG) --- */
-  var PETAL_SRCS=["assets/undangya/pusaka-sogan/petal.webp","assets/undangya/pusaka-sogan/daun.webp"];
+  /* --- kelopak melati melayang (partikel MELAYANG) --- */
+  var PETAL_SRCS=["assets/undangya/pusaka-sogan/petal.webp"];
   var petalFields=[];
   function makePetals(field,count,gustExtra){
     if(reduced||!field)return;
     var items=[];
     for(var i=0;i<count;i++){
       var img=document.createElement("img");
-      img.className="petal"; img.src=PETAL_SRCS[i%2]; img.alt="";
+      img.className="petal"; img.src=PETAL_SRCS[0]; img.alt="";
       img.style.width=(12+Math.random()*12).toFixed(0)+"px";
       img.style.opacity="0";
       field.appendChild(img);
